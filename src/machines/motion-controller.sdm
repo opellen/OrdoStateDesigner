@@ -1,0 +1,482 @@
+{
+  "formatVersion": 9,
+  "initialStateId": 1,
+  "name": "Motion Controller",
+  "nextId": 35,
+  "context": [
+    {
+      "id": 20,
+      "name": "x",
+      "type": "Double",
+      "initialValue": "0.0"
+    },
+    {
+      "id": 21,
+      "name": "y",
+      "type": "Double",
+      "initialValue": "0.0"
+    },
+    {
+      "id": 22,
+      "name": "targetX",
+      "type": "Double",
+      "initialValue": "100.0"
+    },
+    {
+      "id": 23,
+      "name": "targetY",
+      "type": "Double",
+      "initialValue": "50.0"
+    },
+    {
+      "id": 24,
+      "name": "distance",
+      "type": "Double",
+      "initialValue": "0.0"
+    },
+    {
+      "id": 25,
+      "name": "velocity",
+      "type": "Double",
+      "initialValue": "0.0"
+    },
+    {
+      "id": 26,
+      "name": "acceleration",
+      "type": "Double",
+      "initialValue": "4.0"
+    },
+    {
+      "id": 27,
+      "name": "maxVelocity",
+      "type": "Double",
+      "initialValue": "20.0"
+    },
+    {
+      "id": 28,
+      "name": "headingAngle",
+      "type": "Double",
+      "initialValue": "0.0"
+    },
+    {
+      "id": 29,
+      "name": "tolerance",
+      "type": "Double",
+      "initialValue": "0.5"
+    },
+    {
+      "id": 30,
+      "name": "stepCount",
+      "type": "Int",
+      "initialValue": "0"
+    },
+    {
+      "id": 31,
+      "name": "heartbeatInterval",
+      "type": "Int",
+      "initialValue": "5"
+    },
+    {
+      "id": 32,
+      "name": "isCalibrated",
+      "type": "Bool",
+      "initialValue": "false"
+    },
+    {
+      "id": 33,
+      "name": "targetReached",
+      "type": "Bool",
+      "initialValue": "false"
+    },
+    {
+      "id": 34,
+      "name": "statusMessage",
+      "type": "String",
+      "initialValue": "'Standby'"
+    }
+  ],
+  "states": [
+    {
+      "id": 1,
+      "name": "Idle",
+      "kind": "Normal",
+      "x": 960.0,
+      "y": 120.0,
+      "parentId": 0,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Default",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "System is stationary and awaiting calibration or navigation commands.",
+      "tags": [
+        "stationary"
+      ],
+      "entryActions": [
+        "statusMessage = 'Standby'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 2,
+      "name": "Calibrating",
+      "kind": "Normal",
+      "x": 960.0,
+      "y": -260.0,
+      "parentId": 0,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Yellow",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Multi-step calibration routine confirming sensor zeros.",
+      "tags": [
+        "setup"
+      ],
+      "entryActions": [
+        "statusMessage = 'Calibrating'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 3,
+      "name": "Navigating",
+      "kind": "Normal",
+      "x": 260.0,
+      "y": 40.0,
+      "parentId": 0,
+      "initialChildId": 4,
+      "historyDeep": false,
+      "color": "Blue",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Compound motion hierarchy managing kinematics profiles.",
+      "tags": [
+        "motion"
+      ],
+      "entryActions": [],
+      "exitActions": []
+    },
+    {
+      "id": 4,
+      "name": "Accelerating",
+      "kind": "Normal",
+      "x": 260.0,
+      "y": 140.0,
+      "parentId": 3,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Green",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Ramping velocity up towards maxVelocity ceiling.",
+      "tags": [
+        "speed-up"
+      ],
+      "entryActions": [
+        "statusMessage = 'Accelerating'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 5,
+      "name": "Cruising",
+      "kind": "Normal",
+      "x": 260.0,
+      "y": 460.0,
+      "parentId": 3,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Default",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Maintaining cruise velocity with periodic telemetry intervals.",
+      "tags": [
+        "constant-speed"
+      ],
+      "entryActions": [
+        "statusMessage = 'Cruising'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 6,
+      "name": "Decelerating",
+      "kind": "Normal",
+      "x": 260.0,
+      "y": 800.0,
+      "parentId": 3,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Orange",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Controlled braking profile approaching the target coordinates.",
+      "tags": [
+        "braking"
+      ],
+      "entryActions": [
+        "statusMessage = 'Decelerating'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 7,
+      "name": "TelemetrySync",
+      "kind": "Normal",
+      "x": -380.0,
+      "y": 460.0,
+      "parentId": 0,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Purple",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Periodic telemetry calculation for distance and angle alignment.",
+      "tags": [
+        "diagnostics"
+      ],
+      "entryActions": [
+        "statusMessage = 'TelemetrySync'"
+      ],
+      "exitActions": []
+    },
+    {
+      "id": 8,
+      "name": "Reached",
+      "kind": "Final",
+      "x": 960.0,
+      "y": 800.0,
+      "parentId": 0,
+      "initialChildId": 0,
+      "historyDeep": false,
+      "color": "Green",
+      "invokeSrc": "",
+      "invokeId": "",
+      "invokeOutputType": "Int",
+      "description": "Target reached within tolerance bounds.",
+      "tags": [
+        "arrived"
+      ],
+      "entryActions": [
+        "targetReached = true"
+      ],
+      "exitActions": [
+        "targetReached = false"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": 9,
+      "from": 1,
+      "to": 2,
+      "event": "START_CALIBRATION",
+      "guard": "!isCalibrated",
+      "action": "stepCount = 0",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 10,
+      "from": 2,
+      "to": 2,
+      "event": "CALIBRATION_STEP",
+      "guard": "stepCount < 3",
+      "action": "stepCount = stepCount + 1",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 11,
+      "from": 2,
+      "to": 1,
+      "event": "CALIBRATION_STEP",
+      "guard": "stepCount >= 3 && !isCalibrated",
+      "action": "isCalibrated = true",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 12,
+      "from": 1,
+      "to": 4,
+      "event": "START_NAVIGATION",
+      "guard": "isCalibrated && (abs(targetX - x) > tolerance || abs(targetY - y) > tolerance)",
+      "action": "distance = sqrt(pow(targetX - x, 2.0) + pow(targetY - y, 2.0))",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 35.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 13,
+      "from": 4,
+      "to": 5,
+      "event": "TICK",
+      "guard": "velocity + acceleration >= maxVelocity",
+      "action": "velocity = maxVelocity",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 14,
+      "from": 4,
+      "to": 4,
+      "event": "TICK",
+      "guard": "velocity + acceleration < maxVelocity && distance > 20.0",
+      "action": "velocity = min(velocity + acceleration * 0.8, maxVelocity)",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 15,
+      "from": 5,
+      "to": 6,
+      "event": "TICK",
+      "guard": "targetX - x <= pow(velocity, 2.0) / (2.0 * acceleration) + 5.0",
+      "action": "velocity = max(velocity - 2.0, 5.0)",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 16,
+      "from": 5,
+      "to": 7,
+      "event": "TICK",
+      "guard": "distance > 15.0 && stepCount % heartbeatInterval == 0",
+      "action": "distance = Math.sqrt(Math.pow(targetX - x, 2.0) + Math.pow(targetY - y, 2.0))",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": -48.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 17,
+      "from": 5,
+      "to": 5,
+      "event": "TICK",
+      "guard": "",
+      "action": "x = round((x + velocity * 0.1) * 100.0) / 100.0",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 18,
+      "from": 7,
+      "to": 5,
+      "event": "RESUME",
+      "guard": "headingAngle < 2.0 * Math.PI",
+      "action": "headingAngle = floor((headingAngle + 0.25) * 10.0) / 10.0",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 19,
+      "from": 7,
+      "to": 5,
+      "event": "RESUME",
+      "guard": "headingAngle >= 2.0 * Math.PI && tolerance > 0.0",
+      "action": "headingAngle = ceil(headingAngle) - 6.0",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 48.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 20,
+      "from": 6,
+      "to": 8,
+      "event": "TICK",
+      "guard": "abs(targetX - x) <= tolerance && abs(targetY - y) <= tolerance",
+      "action": "velocity = 0.0",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 21,
+      "from": 6,
+      "to": 6,
+      "event": "TICK",
+      "guard": "velocity > 1.0 && abs(targetX - x) > tolerance",
+      "action": "velocity = max(velocity - acceleration * 0.5, 1.0)",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 22,
+      "from": 3,
+      "to": 1,
+      "event": "ABORT",
+      "guard": "",
+      "action": "velocity = 0.0",
+      "delayMs": 0,
+      "labelOffsetX": 30.0,
+      "labelOffsetY": -35.0,
+      "color": "Default",
+      "machineSelf": false
+    },
+    {
+      "id": 23,
+      "from": 8,
+      "to": 1,
+      "event": "RESET",
+      "guard": "",
+      "action": "isCalibrated = false",
+      "delayMs": 0,
+      "labelOffsetX": 0.0,
+      "labelOffsetY": 0.0,
+      "color": "Default",
+      "machineSelf": false
+    }
+  ],
+  "notes": [
+    {
+      "id": 24,
+      "x": -380.0,
+      "y": 140.0,
+      "text": "Motion Controller Test Machine:\nExercises arithmetic (+ - * / %), math functions (sqrt, pow, abs, round, floor, ceil, min, max),\nMath namespace aliases (Math.sqrt, Math.pow), constants (Math.PI), and compound guards/assigns.",
+      "color": "Blue"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+// Windows exe icon; the .ico is built by tools/app-icon/make_ico.py
+IDI_ICON1 ICON "state-designer.ico"

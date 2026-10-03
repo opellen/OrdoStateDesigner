@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>brand/logo-mark.svg</file>
+    </qresource>
+</RCC>

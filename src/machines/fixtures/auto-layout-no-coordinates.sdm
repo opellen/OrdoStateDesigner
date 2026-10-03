@@ -1,0 +1,287 @@
+{
+    "context": [
+        {
+            "id": 1,
+            "initialValue": "0",
+            "name": "sampleCount",
+            "type": "Int"
+        },
+        {
+            "id": 2,
+            "initialValue": "0.0",
+            "name": "score",
+            "type": "Double"
+        },
+        {
+            "id": 3,
+            "initialValue": "\"\"",
+            "name": "lastError",
+            "type": "String"
+        }
+    ],
+    "formatVersion": 10,
+    "initialStateId": 4,
+    "name": "SensorPipeline",
+    "nextId": 19,
+    "notes": [
+    ],
+    "states": [
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 4,
+            "initialChildId": 0,
+            "invokeId": "",
+            "invokeOutputType": "Int",
+            "invokeSrc": "",
+            "kind": "Normal",
+            "name": "Idle",
+            "parentId": 0,
+            "tags": [
+            ]
+        },
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 5,
+            "initialChildId": 0,
+            "invocations": [
+                {
+                    "id": "fetch",
+                    "outputType": "Int",
+                    "src": "fetchSamples"
+                },
+                {
+                    "id": "",
+                    "outputType": "Int",
+                    "src": "service2"
+                },
+                {
+                    "id": "",
+                    "outputType": "Int",
+                    "src": "service3"
+                }
+            ],
+            "invokeId": "fetch",
+            "invokeOutputType": "Int",
+            "invokeSrc": "fetchSamples",
+            "kind": "Normal",
+            "name": "Fetching",
+            "parentId": 0,
+            "tags": [
+            ]
+        },
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 6,
+            "initialChildId": 0,
+            "invocations": [
+                {
+                    "id": "analyze",
+                    "outputType": "Double",
+                    "src": "runAnalysis"
+                }
+            ],
+            "invokeId": "analyze",
+            "invokeOutputType": "Double",
+            "invokeSrc": "runAnalysis",
+            "kind": "Normal",
+            "name": "Analyzing",
+            "parentId": 0,
+            "tags": [
+            ]
+        },
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 7,
+            "initialChildId": 0,
+            "invokeId": "",
+            "invokeOutputType": "Int",
+            "invokeSrc": "",
+            "kind": "Normal",
+            "name": "Report",
+            "parentId": 0,
+            "tags": [
+            ]
+        },
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 8,
+            "initialChildId": 0,
+            "invokeId": "",
+            "invokeOutputType": "Int",
+            "invokeSrc": "",
+            "kind": "Normal",
+            "name": "Review",
+            "parentId": 0,
+            "tags": [
+            ]
+        },
+        {
+            "color": "Default",
+            "description": "",
+            "entryActions": [
+            ],
+            "exitActions": [
+            ],
+            "historyDeep": false,
+            "id": 9,
+            "initialChildId": 0,
+            "invokeId": "",
+            "invokeOutputType": "Int",
+            "invokeSrc": "",
+            "kind": "Normal",
+            "name": "Failed",
+            "parentId": 0,
+            "tags": [
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "action": "",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "START",
+            "from": 4,
+            "guard": "",
+            "id": 10,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 5
+        },
+        {
+            "action": "sampleCount = output",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "done.invoke.fetch",
+            "from": 5,
+            "guard": "",
+            "id": 11,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 6
+        },
+        {
+            "action": "lastError = error",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "error.platform.fetch",
+            "from": 5,
+            "guard": "",
+            "id": 12,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 9
+        },
+        {
+            "action": "score = output",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "done.invoke.analyze",
+            "from": 6,
+            "guard": "output >= 0.8",
+            "id": 13,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 7
+        },
+        {
+            "action": "score = output",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "done.invoke.analyze",
+            "from": 6,
+            "guard": "output < 0.8",
+            "id": 14,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 8
+        },
+        {
+            "action": "lastError = error",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "error.platform.analyze",
+            "from": 6,
+            "guard": "",
+            "id": 15,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 9
+        },
+        {
+            "action": "",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "RESET",
+            "from": 7,
+            "guard": "",
+            "id": 16,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 4
+        },
+        {
+            "action": "",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "RESET",
+            "from": 8,
+            "guard": "",
+            "id": 17,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 4
+        },
+        {
+            "action": "",
+            "always": false,
+            "color": "Default",
+            "delayMs": 0,
+            "event": "RETRY",
+            "from": 9,
+            "guard": "",
+            "id": 18,
+            "machineSelf": false,
+            "reenter": false,
+            "to": 4
+        }
+    ]
+}

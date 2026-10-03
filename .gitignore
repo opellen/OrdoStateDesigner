@@ -1,0 +1,22 @@
+# Build output
+build*/
+out/
+
+# Runtime scratch (logs, probe captures written by the app)
+temp/
+*.log
+
+# Local commit tooling (lives beside .git, never committed)
+.axcommit/
+
+# IDE / editor
+.vs/
+.vscode/
+.idea/
+compile_commands.json
+CMakeUserPresets.json
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store

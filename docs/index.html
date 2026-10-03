@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordo State Designer - Visual State Machine Designer for Modern C++20</title>
+  <meta name="description" content="Draw UML statecharts visually, simulate them live, and generate zero-dependency clean C++20 code. Built with modern C++20 and Qt 6 Widgets on the Ordo Framework.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+  
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ordo State Designer - Visual Statecharts &amp; C++20 Code Generator">
+  <meta property="og:description" content="Draw UML statecharts visually, simulate live, and generate zero-dependency clean C++20 code.">
+  <meta property="og:image" content="assets/gumroad/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="assets/gumroad/cover.jpg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <img src="assets/lockup-horizontal-dark.svg" alt="Ordo State Designer" class="nav-lockup">
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#showcase" class="nav-link">Architecture</a></li>
+          <li><a href="#pricing" class="nav-link">Downloads &amp; Pricing</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/opellen/OrdoStateDesigner" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a id="nav-btn-installer" href="https://opellen.gumroad.com/l/ordo-state-designer" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          Get Installer
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>v0.1.0 • Standalone C++20 / Qt 6 Widgets Application</span>
+        </div>
+
+        <h1 class="hero-title">
+          Draw Statecharts Visually.<br>
+          Simulate Live.<br>
+          <span class="gradient-text">Generate Clean C++20.</span>
+        </h1>
+
+        <p class="hero-description">
+          A native, high-performance visual state machine designer built on the 
+          <a href="https://github.com/opellen/Ordo" target="_blank" style="text-decoration: underline; color: var(--accent-cyan);">Ordo Framework</a>. 
+          Interactively model hierarchical states, verify logic with the live trace simulator, 
+          and generate zero-Qt dependency C++ code tailored for real-time systems.
+        </p>
+
+        <div class="hero-cta-group">
+          <a id="hero-btn-gumroad" href="https://opellen.gumroad.com/l/ordo-state-designer" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Windows Installer
+          </a>
+          <a href="https://github.com/opellen/OrdoStateDesigner" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Build from Source (Free)
+          </a>
+        </div>
+
+        <div class="hero-note">
+          Supports Windows 10/11 • AGPL-3.0 Open Source &amp; Commercial Dual License
+        </div>
+      </div>
+
+      <!-- Showcase Split Preview (Visual Canvas & Generated C++) -->
+      <div id="showcase" class="showcase-wrapper">
+        <div class="showcase-header">
+          <div class="window-dots">
+            <span class="window-dot dot-red"></span>
+            <span class="window-dot dot-yellow"></span>
+            <span class="window-dot dot-green"></span>
+          </div>
+          <div class="showcase-tabs">
+            <button class="showcase-tab active" id="tab-canvas" onclick="switchTab('canvas')">Statechart Canvas</button>
+            <button class="showcase-tab" id="tab-codegen" onclick="switchTab('codegen')">Generated C++20 Header</button>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-subtle); font-family: monospace;">
+            LoginSession.sdm
+          </div>
+        </div>
+
+        <div class="showcase-body">
+          <!-- Left: Canvas Mock -->
+          <div class="canvas-pane" id="pane-canvas">
+            <div class="canvas-toolbar">
+              <span class="tool-chip active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                Selection
+              </span>
+              <span class="tool-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Transition
+              </span>
+              <span class="tool-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>
+                Breakpoints
+              </span>
+              <span class="tool-chip" style="margin-left: auto; color: var(--accent-emerald);">
+                ● Live Simulator Active
+              </span>
+            </div>
+
+            <div class="statechart-mock">
+              <!-- State 1 -->
+              <div class="state-box">
+                <div class="state-header">
+                  <span>Idle</span>
+                  <span class="state-pill" style="background: rgba(148, 163, 184, 0.2); color: #94a3b8;">Initial</span>
+                </div>
+                <div class="state-body">
+                  entry: resetSession()<br>
+                  context: attempts = 0
+                </div>
+              </div>
+
+              <!-- Transition -->
+              <div class="transition-arrow">
+                <span class="arrow-line"></span>
+                <span>SUBMIT [validInput] / startAuth()</span>
+                <span class="arrow-line"></span>
+              </div>
+
+              <!-- State 2 (Active Glow) -->
+              <div class="state-box active">
+                <div class="state-header">
+                  <span style="color: #a5b4fc;">Authenticating</span>
+                  <span class="state-pill">Active</span>
+                </div>
+                <div class="state-body">
+                  invoke: authService.verify()<br>
+                  onDone ➔ Authenticated<br>
+                  onError [attempts &lt; 3] ➔ Retry
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.75rem; color: var(--text-subtle); display: flex; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+              <span>Trace: #14 EVENT 'SUBMIT' dispatched</span>
+              <span>Clock: 450ms</span>
+            </div>
+          </div>
+
+          <!-- Right: Code Preview -->
+          <div class="code-pane" id="pane-codegen">
+            <div class="code-pane-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span>generated/login_session.hpp</span>
+              </div>
+              <span style="color: var(--accent-cyan);">Zero External Dependencies (Pure C++20)</span>
+            </div>
+            <pre class="code-content"><code><span class="code-comment">// Generated by Ordo State Designer v0.1.0</span>
+<span class="code-comment">// Transition core requires standard C++20 library only</span>
+<span class="code-keyword">#pragma once</span>
+<span class="code-keyword">#include</span> <span class="code-string">&lt;variant&gt;</span>
+<span class="code-keyword">#include</span> <span class="code-string">&lt;string_view&gt;</span>
+
+<span class="code-keyword">namespace</span> <span class="code-type">app::generated</span> {
+
+<span class="code-keyword">struct</span> <span class="code-type">LoginContext</span> {
+    <span class="code-type">int</span> attempts = 0;
+    <span class="code-type">bool</span> rememberMe = <span class="code-keyword">false</span>;
+};
+
+<span class="code-keyword">class</span> <span class="code-type">LoginStateMachine</span> {
+<span class="code-keyword">public</span>:
+    <span class="code-keyword">enum class</span> <span class="code-type">State</span> { Idle, Authenticating, Authenticated, Locked };
+    <span class="code-keyword">enum class</span> <span class="code-type">Event</span> { Submit, Cancel, Timeout, Success, Failure };
+
+    <span class="code-keyword">constexpr</span> <span class="code-type">void</span> <span class="code-func">dispatch</span>(<span class="code-type">Event</span> e) {
+        <span class="code-keyword">switch</span> (m_state) {
+        <span class="code-keyword">case</span> <span class="code-type">State</span>::Idle:
+            <span class="code-keyword">if</span> (e == <span class="code-type">Event</span>::Submit &amp;&amp; <span class="code-func">guard_validInput</span>()) {
+                <span class="code-func">action_startAuth</span>();
+                m_state = <span class="code-type">State</span>::Authenticating;
+            }
+            <span class="code-keyword">break</span>;
+        <span class="code-comment">/* Deterministic, zero-allocation dispatch */</span>
+        }
+    }
+<span class="code-keyword">private</span>:
+    <span class="code-type">State</span> m_state = <span class="code-type">State</span>::Idle;
+    <span class="code-type">LoginContext</span> m_ctx;
+};
+
+} <span class="code-comment">// namespace app::generated</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-title">Built for Modern Systems Engineering</h2>
+        <p class="section-desc">
+          Everything you need to design, verify, and ship bulletproof state machine architectures.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="3" x2="9" y2="21"></line>
+              <line x1="15" y1="3" x2="15" y2="21"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Full Harel Statecharts</h3>
+          <p class="feature-body">
+            Compound and parallel states, shallow &amp; deep history states, delayed (<code style="color: var(--accent-cyan);">after</code>) and periodic (<code style="color: var(--accent-cyan);">every</code>) transitions, targetless transitions, and wildcard event routing.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+          <h3 class="feature-title">Live Interactive Simulator</h3>
+          <p class="feature-body">
+            Execute statecharts right on the canvas. Step forward and backward, inspect live context variables, set breakpoints, inject synthetic events, and manually complete asynchronous invocations.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Zero-Qt Generated C++20</h3>
+          <p class="feature-body">
+            Generated transition cores require only the standard library (<code style="color: var(--accent-cyan);">&lt;variant&gt;</code>, <code style="color: var(--accent-cyan);">&lt;concepts&gt;</code>). Ideal for embedded devices, gaming engines, and real-time backend services.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Multi-Kernel Shell Isolation</h3>
+          <p class="feature-body">
+            Each open document runs on its own isolated Ordo <code style="color: var(--accent-cyan);">AppKernel</code>. Crash containment and memory boundaries guarantee one complex diagram never degrades another.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Standard Interoperability</h3>
+          <p class="feature-body">
+            Two-way import and export with XState v5 JSON specifications and W3C SCXML. Export directly to PlantUML for technical design reviews and architectural documentation.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5h-2v-2h2zm0-4.5h-2V7h2z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">AI Agent &amp; MCP Bridge</h3>
+          <p class="feature-body">
+            Native Model Context Protocol (MCP) server support. Enable AI pair programmers (Claude, Antigravity, Gemini) to inspect state models, arrange layouts, and synthesize machines programmatically.
+          </p>
+        </div>
+      </div>
+
+      <!-- Architecture Callout -->
+      <div class="callout-box">
+        <div>
+          <h3 class="callout-title">Clean Separation: Topology vs Implementation</h3>
+          <p class="callout-desc">
+            Ordo enforces a strict boundary between machine topology and concrete domain logic. The visual diagram declares states, transitions, and guards; domain callbacks are implemented in pure, testable C++ delegates outside the generated code.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <span class="badge">No Heap Allocations on Transitions</span>
+            <span class="badge">Deterministic Dispatch</span>
+            <span class="badge">Header-Only Mode Supported</span>
+          </div>
+        </div>
+
+        <div class="callout-stats">
+          <div class="stat-item">
+            <div class="stat-num">0 ms</div>
+            <div class="stat-label">External Event Jitter</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0 Qt DLL</div>
+            <div class="stat-label">In Generated Core</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Distribution Options & Pricing -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Distribution &amp; Licensing</span>
+        <h2 class="section-title">Choose How You Ship</h2>
+        <p class="section-desc">
+          Free and open-source under GNU AGPL-3.0 for everyone who compiles from source. 
+          Ready-to-run pre-compiled Windows installers available via Gumroad.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Option 1: Community (Source Build) -->
+        <div class="pricing-card">
+          <div class="tier-name">Community Build</div>
+          <div class="tier-desc">For open-source enthusiasts, learners, and developers comfortable building from source.</div>
+          
+          <div class="tier-price-box">
+            <span class="tier-price">$0</span>
+            <span class="tier-frequency">Free forever</span>
+          </div>
+
+          <ul class="tier-features">
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Full C++20 / Qt 6 source code</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>GNU AGPL-3.0 License</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Build locally with CMake &amp; Ninja</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Community issue tracker on GitHub</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="dash-icon">—</span>
+              <span style="color: var(--text-subtle);">Requires manual Qt6/MinGW toolchain setup</span>
+            </li>
+          </ul>
+
+          <a href="https://github.com/opellen/OrdoStateDesigner" target="_blank" rel="noopener" class="btn btn-secondary pricing-btn">
+            View on GitHub
+          </a>
+        </div>
+
+        <!-- Option 2: Pre-compiled Windows Installer (Gumroad) - Featured -->
+        <div class="pricing-card featured">
+          <span class="featured-pill">Recommended</span>
+          <div class="tier-name">Personal / Indie</div>
+          <div class="tier-desc">Single-click pre-compiled Windows installer for solo engineers and indie creators.</div>
+          
+          <div class="tier-price-box">
+            <span class="tier-price">$29</span>
+            <span class="tier-frequency">One-time purchase</span>
+          </div>
+
+          <ul class="tier-features">
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span><strong>Pre-compiled Windows Installer (.exe)</strong></span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span><strong>Portable ZIP package included</strong></span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Zero build hassle — installs in 10 seconds</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>No admin / UAC prompt required (Local AppData)</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Desktop shortcut &amp; clean uninstaller</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>All minor updates &amp; bug fixes included</span>
+            </li>
+          </ul>
+
+          <a id="pricing-btn-personal" href="https://opellen.gumroad.com/l/ordo-state-designer" target="_blank" rel="noopener" class="btn btn-primary pricing-btn">
+            Get Installer on Gumroad
+          </a>
+        </div>
+
+        <!-- Option 3: Studio / Commercial License -->
+        <div class="pricing-card">
+          <div class="tier-name">Studio / Commercial</div>
+          <div class="tier-desc">For commercial teams, studios, and enterprises requiring corporate compliance.</div>
+          
+          <div class="tier-price-box">
+            <span class="tier-price">$199</span>
+            <span class="tier-frequency">One-time / Seat</span>
+          </div>
+
+          <ul class="tier-features">
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Pre-compiled Windows Installer &amp; Portable ZIP</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span><strong>Commercial / Proprietary License</strong></span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span><strong>Exemption from AGPL-3.0 copyleft obligations</strong></span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Formal Corporate Invoice &amp; VAT receipts</span>
+            </li>
+            <li class="tier-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Priority technical support &amp; issue triage</span>
+            </li>
+          </ul>
+
+          <a id="pricing-btn-commercial" href="https://opellen.gumroad.com/l/ordo-state-designer" target="_blank" rel="noopener" class="btn btn-secondary pricing-btn">
+            Purchase Studio License
+          </a>
+        </div>
+      </div>
+
+      <!-- Friction vs Convenience -->
+      <div class="friction-section">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.4rem;">Why Pre-Compiled Binaries?</h3>
+          <p class="section-desc" style="font-size: 0.92rem;">
+            We believe in open source, but we also respect your development time.
+          </p>
+        </div>
+
+        <div class="friction-grid">
+          <div class="friction-card left">
+            <div class="friction-card-title">Compiling From Source (Free)</div>
+            <ul>
+              <li>• Requires Qt 6.11 MinGW/MSVC toolchain (~15 GB disk space)</li>
+              <li>• Requires CMake 3.24+, Ninja, and C++20 compliant compiler</li>
+              <li>• Sibling checkout and configuration of the Ordo Framework repo</li>
+              <li>• Environment variable PATH setup and Qt DLL resolution</li>
+              <li>• Estimated setup time: <strong>1 to 2 hours</strong></li>
+            </ul>
+          </div>
+
+          <div class="friction-card right">
+            <div class="friction-card-title" style="color: #a5b4fc;">Pre-Compiled Installer ($29)</div>
+            <ul>
+              <li>• Standalone package with all Qt &amp; MinGW runtimes bundled</li>
+              <li>• Double-click installer or extract portable ZIP</li>
+              <li>• No C++ compiler, SDK, or build tools needed on the machine</li>
+              <li>• Ready to design statecharts and generate code immediately</li>
+              <li>• Estimated setup time: <strong>under 60 seconds</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 class="section-title">Common Inquiries</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Does the generated C++ code require any external runtime libraries?</div>
+          <div class="faq-a">
+            No. The generated transition core and statechart classes rely strictly on the standard C++20 library (<code style="color: var(--accent-cyan);">&lt;variant&gt;</code>, <code style="color: var(--accent-cyan);">&lt;concepts&gt;</code>, etc.). There are zero framework headers, macros, or runtime DLL dependencies in emitted files—run it anywhere from embedded systems to game engines.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Can I use the generated C++ code in commercial products?</div>
+          <div class="faq-a">
+            Yes. The code generator emits code that you own. For complete peace of mind, team compliance, and corporate procurement invoices, our Studio / Commercial tier grants an explicit commercial license free of AGPL copyleft stipulations.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Can I run Ordo State Designer on Linux or macOS?</div>
+          <div class="faq-a">
+            Yes. The application is written in standard cross-platform C++20 and Qt 6 Widgets. Linux and macOS users can build from source using CMake and Ninja directly from our open-source GitHub repository.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">What is the repository's contribution policy?</div>
+          <div class="faq-a">
+            To maintain architectural cohesion and single-maintainer sustainability, we operate on an issue-driven development model and do not accept unsolicited code Pull Requests. We actively welcome bug reports, minimal reproduction cases, and feature discussions via GitHub Issues.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/lockup-horizontal-dark.svg" alt="Ordo State Designer" style="height: 32px; margin-bottom: 16px;">
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;">
+            Visual state machine design and C++20 code generation for mission-critical software. Built with care by opellen.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-links-col">
+            <span class="footer-col-title">Product</span>
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#showcase" class="footer-link">Showcase</a>
+            <a href="#pricing" class="footer-link">Downloads</a>
+            <a href="https://opellen.gumroad.com/l/ordo-state-designer" target="_blank" rel="noopener" class="footer-link">Gumroad Store</a>
+          </div>
+
+          <div class="footer-links-col">
+            <span class="footer-col-title">Open Source</span>
+            <a href="https://github.com/opellen/OrdoStateDesigner" target="_blank" rel="noopener" class="footer-link">GitHub Repository</a>
+            <a href="https://github.com/opellen/Ordo" target="_blank" rel="noopener" class="footer-link">Ordo Framework</a>
+            <a href="https://github.com/opellen/OrdoStateDesigner/blob/main/LICENSE" target="_blank" rel="noopener" class="footer-link">AGPL-3.0 License</a>
+            <a href="https://github.com/opellen/OrdoStateDesigner/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="footer-link">Contributing Policy</a>
+          </div>
+
+          <div class="footer-links-col">
+            <span class="footer-col-title">Contact</span>
+            <a href="https://github.com/opellen/OrdoStateDesigner/issues" target="_blank" rel="noopener" class="footer-link">GitHub Issues</a>
+            <a href="mailto:contact@opellen.com" class="footer-link">Commercial Inquiry</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 opellen. All rights reserved.</div>
+        <div style="color: var(--text-subtle);">
+          Ordo State Designer is licensed under GNU AGPL-3.0 &amp; Commercial Dual Terms.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(tab) {
+      const tabCanvas = document.getElementById('tab-canvas');
+      const tabCodegen = document.getElementById('tab-codegen');
+      const paneCanvas = document.getElementById('pane-canvas');
+      const paneCodegen = document.getElementById('pane-codegen');
+
+      if (window.innerWidth <= 900) {
+        if (tab === 'canvas') {
+          tabCanvas.classList.add('active');
+          tabCodegen.classList.remove('active');
+          paneCanvas.style.display = 'flex';
+          paneCodegen.style.display = 'none';
+        } else {
+          tabCodegen.classList.add('active');
+          tabCanvas.classList.remove('active');
+          paneCanvas.style.display = 'none';
+          paneCodegen.style.display = 'flex';
+        }
+      } else {
+        if (tab === 'canvas') {
+          tabCanvas.classList.add('active');
+          tabCodegen.classList.remove('active');
+        } else {
+          tabCodegen.classList.add('active');
+          tabCanvas.classList.remove('active');
+        }
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      const paneCanvas = document.getElementById('pane-canvas');
+      const paneCodegen = document.getElementById('pane-codegen');
+      if (window.innerWidth > 900) {
+        paneCanvas.style.display = 'flex';
+        paneCodegen.style.display = 'flex';
+      }
+    });
+  </script>
+</body>
+</html>

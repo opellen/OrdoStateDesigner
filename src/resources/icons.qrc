@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/add.svg</file>
+        <file>icons/assign.svg</file>
+        <file>icons/breakpoint.svg</file>
+        <file>icons/check.svg</file>
+        <file>icons/chevron-right.svg</file>
+        <file>icons/context-var.svg</file>
+        <file>icons/design.svg</file>
+        <file>icons/expr.svg</file>
+        <file>icons/fit.svg</file>
+        <file>icons/generate-cpp.svg</file>
+        <file>icons/guard.svg</file>
+        <file>icons/hook.svg</file>
+        <file>icons/invoke.svg</file>
+        <file>icons/more.svg</file>
+        <file>icons/note.svg</file>
+        <file>icons/pause.svg</file>
+        <file>icons/play.svg</file>
+        <file>icons/raise.svg</file>
+        <file>icons/remove.svg</file>
+        <file>icons/reset.svg</file>
+        <file>icons/reverse.svg</file>
+        <file>icons/self-loop.svg</file>
+        <file>icons/send-parent.svg</file>
+        <file>icons/send-to.svg</file>
+        <file>icons/settings.svg</file>
+        <file>icons/simulate.svg</file>
+        <file>icons/warning.svg</file>
+    </qresource>
+</RCC>
